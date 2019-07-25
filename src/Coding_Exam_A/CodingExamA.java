@@ -40,6 +40,7 @@ public class CodingExamA {
 		
 		for (int i = 0; i < thread.length; i++) {
 		Robot rbt = robots[i];	
+		rbt = new Robot();
 		rbt.penDown();
 		rbt.setSpeed(1000);
 		if (color.equalsIgnoreCase("red")) {
