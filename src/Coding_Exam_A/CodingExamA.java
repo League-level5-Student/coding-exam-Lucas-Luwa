@@ -2,9 +2,7 @@ package Coding_Exam_A;
 
 import java.awt.Color;
 import java.util.ArrayList;
-
 import javax.swing.JOptionPane;
-
 import org.jointheleague.graphical.robot.Robot;
 
 public class CodingExamA {
@@ -29,43 +27,41 @@ public class CodingExamA {
 		int sidesofshape = Integer.parseInt(sides);
 		Robot[] robots = new Robot[numberofrobots];
 		Thread[] thread = new Thread[numberofrobots];
-//		for (int i = 0; i < numberofrobots ; i++) {
-//			robots[i] = "r" + i;
-//		}
-//		for (int i = 0; i < numberofrobots; i++) {
-//			String x = robots[i];
-//			x = new Robot(); 
-//		}
-		System.out.println(robots[4]);
-		
 		for (int i = 0; i < thread.length; i++) {
-		Robot rbt = robots[i];	
-		rbt = new Robot();
-		rbt.penDown();
-		rbt.setSpeed(1000);
-		if (color.equalsIgnoreCase("red")) {
-			rbt.setPenColor(Color.RED);
-		}
-		if (color.equalsIgnoreCase("blue")) {
-			rbt.setPenColor(Color.BLUE);
-		}
-		if (color.equalsIgnoreCase("green")) {
-			rbt.setPenColor(Color.GREEN);
-		}
-		thread[i] = new Thread(() -> {
-			
-			rbt.setX(90);
-			rbt.setY(120);
-			for (int f = sidesofshape; f > 0; f--) {
-				rbt.move(50);
-				rbt.turn(360/sidesofshape);
+			robots[i] = new Robot();
+			robots[i].penDown();
+			robots[i].setSpeed(10000);
+			if (color.equalsIgnoreCase("red")) {
+				robots[i].setPenColor(Color.RED);
 			}
-			rbt.penUp();
-			rbt.move(2000);
-
-		});
-		thread[i].start();
+			if (color.equalsIgnoreCase("blue")) {
+				robots[i].setPenColor(Color.BLUE);
+			}
+			if (color.equalsIgnoreCase("green")) {
+				robots[i].setPenColor(Color.GREEN);
+			}
+			int x = i;
+			thread[i] = new Thread(() -> {
+				robots[x].setX(90 + 203 * (x % 4));
+				if (x >= 0 && x <= 4) {
+					robots[x].setY(100);
+				}
+				if (x != 0 && x % 4 == 0) {
+					robots[x].setY(100 + 210 * (x / 4));
+				}
+				if (x > 4 && x % 4 != 0) {
+					robots[x].setY(100 + 210 * (x / 4));
+				}
+				for (int f = sidesofshape; f > 0; f--) {
+					robots[x].move(50);
+					robots[x].turn(360 / sidesofshape);
+				}
+				robots[x].penUp();
+				robots[x].move(2000);
+			});
 		}
-		
+		for (int i = 0; i < thread.length; i++) {
+			thread[i].start();
+		}
 	}
 }
