@@ -18,7 +18,7 @@ public class CodingExamA {
 		 * define the Thread functions using lambdas.
 		 * 
 		 * See the Coding_Exam_A_Demo.jar for an example of what the finished product
-		 * should look like.
+		 * should look like. Slightly Different to even out spacing.
 		 */
 		String numofbots = JOptionPane.showInputDialog("How Many Robots?");
 		String color = JOptionPane.showInputDialog("Which Color? (Red, Green, Blue)");

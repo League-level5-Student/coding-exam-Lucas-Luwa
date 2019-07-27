@@ -24,17 +24,26 @@ public class CodingExamB {
 		 */
 		String holder = "";
 		try {
-			// part 2 works, part 1 needs work
 			BufferedReader BR = new BufferedReader(new FileReader(fileName));
+			holder += "File: " + fileName + "\n";
 			String line = "";
-			while(!line.equals(null)) {
-
-			line = BR.readLine();
-			System.out.println(line);
-			if (line.contains("//TODO:")) {
-				holder += line + "\n";
+			int linenumber = 0;
+			while (line != null) {
+				line = BR.readLine();
+				if (line != null && line.contains("//TODO:")) {
+					linenumber++;
+					int start = line.indexOf("//TODO:");
+					int length = line.length();
+					holder += linenumber + ": ";
+					if (linenumber < 10) {
+						holder += " ";
+					}
+					holder += line.substring(start, length) + "\n";
+				} else {
+					linenumber++;
+				}
 			}
-			}
+			holder += "\n";
 			BR.close();
 		} catch (IOException e) {
 			// TODO Auto-generated catch block
@@ -54,7 +63,6 @@ public class CodingExamB {
 		 */
 		try {
 			FileWriter FW = new FileWriter("src/Coding_Exam_B/TODO_Log.txt");
-			System.out.println(finalLogString);
 			FW.write(finalLogString);
 			FW.close();
 		} catch (IOException e) {
